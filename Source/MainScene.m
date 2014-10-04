@@ -11,3 +11,7 @@
 @implementation MainScene
 
 @end
+
+- (void)didLoadFromCCB {
+    
+}
