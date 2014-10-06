@@ -59,6 +59,7 @@
 
 - (CCScene*) startScene
 {
+    [[OALSimpleAudio sharedInstance] preloadBg:@"ccbResources/switch-1.mp3"];
     return [CCBReader loadAsScene:@"MainScene"];
 }
 

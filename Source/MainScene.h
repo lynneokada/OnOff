@@ -7,7 +7,8 @@
 //
 
 #import "CCNode.h"
+#import "GameCenterManager.h"
 
-@interface MainScene : CCNode
+@interface MainScene : CCNode <GameCenterManagerDelegate>
 
 @end
