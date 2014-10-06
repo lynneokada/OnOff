@@ -11,7 +11,11 @@
 @implementation MainScene {
     CCNodeColor *_lampOff;
     CCLabelTTF *_onoffLabel;
+    CCLabelTTF *_score;
     float _gameTime;
+    float _onOffFrequency;
+    int _points;
+    NSArray *_ONorOFF;
 }
 
 - (id)init {
@@ -21,7 +25,7 @@
         self.userInteractionEnabled = TRUE;
         [[GameCenterManager sharedManager] setupManager];
         [[GameCenterManager sharedManager] setDelegate:self];
-        
+        _ONorOFF = @[@"ccbResources/On.wav",@"ccbResources/Off.wav"];
         //[[GameCenterManager sharedManager] saveAndReportScore:1000 leaderboard:@"Leaderboard ID"  sortOrder:GameCenterSortOrder];
         
     }
@@ -43,5 +47,26 @@
         [_onoffLabel removeFromParent];
     }
     
+    int i = arc4random()%2;
+    _onOffFrequency += delta;
+    if (_onOffFrequency > 2) {
+        [[OALSimpleAudio sharedInstance] playEffect:_ONorOFF[i]];
+        _onOffFrequency = 0;
+        if (_ONorOFF[0] && _lampOff.visible == NO) {
+            _points++;
+             _score.string = [NSString stringWithFormat:@"%d", (int)_points];
+        } else if (_ONorOFF[1] && _lampOff.visible == YES) {
+            _points++;
+            _score.string = [NSString stringWithFormat:@"%d", (int)_points];
+        }
+        else {
+            [self gameOver];
+        }
+    }
+}
+
+- (void)gameOver {
+    [[OALSimpleAudio sharedInstance] playEffect:@"ccbResources/lightbulb break 2.mp3"];
+    _lampOff.visible = YES;
 }
 @end

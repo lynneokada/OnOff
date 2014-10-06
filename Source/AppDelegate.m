@@ -59,7 +59,11 @@
 
 - (CCScene*) startScene
 {
-    [[OALSimpleAudio sharedInstance] preloadBg:@"ccbResources/switch-1.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"ccbResources/switch-1.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"ccb.Resources/lightbulb break 2.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"ccbResources/On.wav"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"ccbResources/Off.wav"];
+    
     return [CCBReader loadAsScene:@"MainScene"];
 }
 
